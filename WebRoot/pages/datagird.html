@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>datagird.html</title>
+	<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.3/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.3/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.4.3/demo/demo.css">
+	<script type="text/javascript" src="../jquery-easyui-1.4.3/jquery.min.js"></script>
+	<script type="text/javascript" src="../jquery-easyui-1.4.3/jquery.easyui.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("#dg").datagrid({
+			url:"../ShowStudents.do",
+			columns:[[ 
+				{field:'id',title:'id',width:100},
+				{field:'name',title:'name',width:100},
+				{field:'password',title:'password',width:100}
+			]],
+			toolbar:'#toolbar',  //表格菜单
+			loadMsg:'嗖 ----正在火速加载中 -------------', //加载提示
+			pagination:true, //显示分页工具栏
+			rownumbers:true, //显示行号列
+			singleSelect:true,//是允许选择一行
+			queryParams:{   //在请求数据是发送的额外参数，如果没有则不用谢
+				name:'easyui',
+				hhh:'aa'
+			},
+			height:'350px'
+		});
+	
+	});
+	</script>
+  </head>
+  <body>
+	<table id="dg"></table>
+	<div id="toolbar">
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" >添加</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" >编辑</a>
+		<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true" >删除</a>
+	</div>
+  </body>
+</html>

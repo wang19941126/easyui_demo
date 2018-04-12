@@ -1,0 +1,29 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.etoak.dao.OneToManyTestDao" >
+  	<!-- 
+  		查询班级所有信息 班级老师学生
+  	 -->
+  <!--   <select id="listStudents" resultMap="classes">
+        select c.id class_id,c.name class_name, t.id teacher_id ,t.name teacher_name ,s.id student_id,s.name student_name,s.password student_password
+	from classes c ,teacher t,student s 
+	where c.id = t.id and c.id = s.class_id 
+    </select>   --> 
+                                                                                                                                          
+    <resultMap type="com.etoak.entity.Classes" id="classes">
+        <id property="id" column="class_id"/>
+        <result property="name" column="class_name"/>
+        <!-- 班级老师一对一 -->
+		<association property="teacher" column="teacher_id" javaType="com.etoak.entity.Teacher">
+			<id property="id" column="teacher_id" />
+			<result property="name" column="teacher_name"/>
+		</association>        
+		<!-- 班级学生一对多 -->
+		<collection property="students" ofType="com.etoak.entity.Student">
+			<id property="id" column="student_id" />
+			<result property="name" column="student_name" />
+			<result property="password" column="student_password" />
+		</collection>
+		
+    </resultMap>
+</mapper>

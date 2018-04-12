@@ -1,0 +1,42 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.etoak.dao.StudentDaoIF" >
+    <insert id="addStudent" parameterType="com.etoak.entity.Student">
+        insert into student values(null,#{name},#{password});
+    </insert>
+    <delete id="delStudentById" parameterType="java.lang.Integer">
+        delete from student where id=#{id};
+    </delete>
+    <update id="updateStudent" parameterType="com.etoak.entity.Student">
+        update student set name=#{name},password=#{password} where id=#{id};
+    </update>
+    <!-- 
+        resultMap： 返回数据类型  
+            需要在下文中解释
+     -->
+    <select id="selectStudentById" parameterType="java.lang.Integer" resultMap="student">
+        select * from student where id=#{id};
+    </select>
+    <!-- 
+        这里返回的是list，但list里面存放的还是city对象，所以还是city
+     -->
+    <select id="selectAllStudents" resultMap="student">
+        select * from student;
+    </select>
+    <select id="selectStudentCount" resultType="java.lang.Integer">
+        select count(*) from student;
+    </select>
+    <select id="selectStudentByPage" parameterType="java.util.Map" resultMap="student">
+        select * from student limit #{start},#{max};
+    </select>   
+
+
+    <!-- 
+        返回类型解释
+     -->
+    <resultMap type="com.etoak.entity.Student" id="student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="password" column="password"/>
+    </resultMap>
+</mapper>
